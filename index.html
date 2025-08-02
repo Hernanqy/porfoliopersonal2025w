@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="./estilos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hernán Gustavo Quiroga - VR Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #050505;
+      --primary: #00f5ff;
+      --secondary: #ff00aa;
+      --highlight: #ff8800;
+      --glass: rgba(255,255,255,0.05);
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: var(--bg-dark);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: radial-gradient(circle at 30% 30%, #111 0%, #000 80%);
+    }
+
+    header video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0.2;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      animation: fadeIn 2s ease forwards;
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 40px 60px;
+      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.4);
+      box-shadow: 0 0 30px var(--primary);
+    }
+
+    .header-content h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      margin: 0;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .header-content h2 {
+      font-size: 1.5rem;
+      margin: 15px 0 40px 0;
+      color: var(--primary);
+      text-transform: uppercase;
+    }
+
+    .cta-btn {
+      background: linear-gradient(90deg, var(--primary), var(--highlight));
+      color: #000;
+      font-weight: bold;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 0 15px var(--highlight);
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 0 25px var(--primary);
+    }
+
+    /* LÍNEAS FUTURISTAS */
+    header::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      background-image: 
+        linear-gradient(to right, rgba(0,245,255,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,245,255,0.05) 1px, transparent 1px);
+      background-size: 80px 80px;
+      z-index: 1;
+    }
+
+    /* SECCIONES */
+    section {
+      padding: 100px 10%;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    section h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--primary);
+      font-size: 2.2rem;
+      margin-bottom: 50px;
+      text-align: center;
+      position: relative;
+      text-shadow: 0 0 10px var(--primary);
+    }
+
+    section h3::after {
+      content: '';
+      display: block;
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      margin: 15px auto 0 auto;
+      border-radius: 3px;
+      box-shadow: 0 0 12px var(--primary);
+    }
+
+    /* PERFIL */
+    .profile {
+      text-align: center;
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: #ccc;
+      max-width: 900px;
+      margin: auto;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    /* EXPERIENCIAS */
+    .experience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .experience-item {
+      position: relative;
+      background: var(--glass);
+      border: 1px solid var(--primary);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: 0.4s;
+    }
+
+    .experience-item video {
+      width: 100%;
+      display: block;
+    }
+
+    .experience-item h4 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.3rem;
+      margin: 15px 20px 5px;
+      color: #fff;
+    }
+
+    .experience-item p {
+      margin: 0 20px 20px;
+      color: #aaa;
+    }
+
+    .experience-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(0,245,255,0.15), transparent);
+      transition: 0.5s;
+    }
+
+    .experience-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px var(--primary);
+    }
+
+    .experience-item:hover::before {
+      left: 100%;
+    }
+
+    /* HABILIDADES */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .skill {
+      background: #111;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 12px 22px;
+      border-radius: 25px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .skill:hover {
+      background: var(--primary);
+      color: #000;
+      box-shadow: 0 0 12px var(--primary);
+    }
+
+    /* EDUCACIÓN */
+    .education-item {
+      background: var(--glass);
+      border: 1px solid var(--secondary);
+      padding: 25px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+      transition: 0.3s;
+    }
+
+    .education-item:hover {
+      transform: translateX(5px);
+      box-shadow: 0 0 12px var(--secondary);
+    }
+
+    /* CERTIFICADOS */
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+    }
+
+    .certificate-item {
+      background: var(--glass);
+      border: 1px solid var(--highlight);
+      padding: 15px;
+      border-radius: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .certificate-item img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .certificate-item:hover img {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--highlight);
+    }
+
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
+    }
+
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* CONTACTO */
+    .contact-info {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    .contact-info a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #666;
+      background: #0a0a0a;
+    }
+
+    @keyframes fadeIn { 
+      from {opacity: 0; transform: translateY(30px);} 
+      to {opacity: 1; transform: translateY(0);} 
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <video autoplay muted loop>
+    <source src="https://cdn.pixabay.com/vimeo/239819215/vr-16162.mp4" type="video/mp4">
+  </video>
+  
+  <div class="header-content">
+    <h1>Hernán Gustavo Quiroga</h1>
+    <h2>Desarrollador VR | Experiencias Inmersivas</h2>
+    <button class="cta-btn">📄 Descargar CV</button>
+  </div>
+</header>
+
+<section class="profile">
+  <h3>Perfil Profesional</h3>
+  <p>Especialista en desarrollo de experiencias interactivas de Realidad Virtual y Aumentada. Experiencia en aplicaciones educativas, museos, simulaciones y marketing inmersivo, con dominio de Unity, C#, Oculus/Meta Quest, Unreal Engine 5 y diseño de experiencias 3D.</p>
+</section>
+
+<section>
+  <h3>Experiencias Destacadas</h3>
+  <div class="experience-grid">
+    <div class="experience-item">
+      <video autoplay muted loop>
+        <source src="https://youtube.com/shorts/T7nXJQRzOtE" type="video/mp4">
+      </video>
+      <h4>Museo VR de Energías Renovables</h4>
+      <p>Diseño y desarrollo de experiencia educativa inmersiva para Meta Quest.</p>
+    </div>
+    <div class="experience-item">
+      <video autoplay muted loop>
+        <source src="https://youtu.be/KaM1S5X5Ivk" type="video/mp4">
+      </video>
+      <h4>Fuerte Grande</h4>
+      <p>Juego histórico interactivo con narrativa educativa y mecánicas VR.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3>Habilidades Técnicas</h3>
+  <div class="skills-list">
+    <div class="skill">Unity 3D</div>
+    <div class="skill">C# Scripting</div>
+    <div class="skill">Meta Quest / Oculus SDK</div>
+    <div class="skill">VR Interaction Design</div>
+    <div class="skill">Unreal Engine 5</div>
+    <div class="skill">GitHub / Vercel</div>
+  </div>
+</section>
+
+<section>
+  <h3>Educación y Formación</h3>
+  <div class="education-item">
+    <h4>Image Campus</h4>
+    <p>Unreal Engine 5 para Realidad Virtual (Training en curso)</p>
+  </div>
+  <div class="education-item">
+    <h4>Universidad Nacional de Ingeniería (Perú)</h4>
+    <p>Desarrollo de Aplicaciones en Realidad Virtual</p>
+  </div>
+  <div class="education-item">
+    <h4>Universidad Tecnológica Nacional (UTN)</h4>
+    <p>Desarrollador Web Full Stack</p>
+  </div>
+  <div class="education-item">
+    <h4>Certificación Instructor en Formación Profesional</h4>
+  </div>
+</section>
+
+<section>
+  <h3>Certificados</h3>
+  <div class="certificates-grid">
+    <div class="certificate-item" onclick="openModal(this)">
+      <img src="./IMAGENES/certificadoUNI.jpg" alt="Certificado UNI - Desarrollo VR">
+      <p>UNI (Perú) - Desarrollo VR</p>
+    </div>
+    <div class="certificate-item" onclick="openModal(this)">
+      <img src="./IMAGENES/DIPLOMATURA DESARROLLO WEB.jpg" alt="Certificado Full Stack UTN">
+      <p>Full Stack UTN</p>
+    </div>
+    <div class="certificate-item" onclick="openModal(this)">
+      <img src="./IMAGENES/Captura de pantalla 2025-08-01 185659.png" alt="Instructor en Formación Profesional">
+      <p>Curso Game Desing UTN</p>
+    </div>
+    
+    <div class="certificate-item" onclick="openModal(this)">
+      <img src="./IMAGENES/Captura de pantalla 2025-08-01 185315.png" alt="Certificado Tecnología Educativa UTN">
+      <p>Tecnología Educativa - UTN</p>
+    </div>
+  </div>
+</section>
+<section id="formacion-unreal" class="highlight-section">
+  <div class="unreal-container">
+    <!-- Logo flotante de Unreal Engine -->
+    <div class="floating-logo">
+      <img src="./IMAGENES/ChatGPT Image 1 ago 2025, 07_44_28 p.m..png" alt="Unreal Engine 5 Logo">
+    </div>
+
+    <!-- Imagen principal del curso -->
+    <img src="/IMAGENES/ChatGPT Image 1 ago 2025, 07_41_23 p.m..png" alt="Unreal 5 Image Campus" class="unreal-image">
+
+    <!-- Texto destacado -->
+    <div class="unreal-text">
+      <h2>Especialización en Realidad Virtual con Unreal Engine 5</h2>
+      <p>
+        Inicié en <strong>septiembre 2025</strong> la capacitación profesional en 
+        <strong>Image Campus</strong>, aprendiendo a desarrollar experiencias 
+        inmersivas en <strong>Unreal Engine 5</strong> para 
+        <strong>Meta Quest, HTC Vive</strong> y plataformas <strong>OpenXR</strong>.
+      </p>
+      <p>
+        Este trayecto de especialización me permite diseñar aplicaciones VR 
+        avanzadas, optimizadas y con calidad profesional, 
+        explorando lo último en interactividad y simulaciones 3D.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3>Contacto</h3>
+  <div class="contact-info">
+    <p>📧 <a href="mailto:nexuravr@gmail.com">nexuravr@gmail.com</a></p>
+    <p>📱 <a href="tel:+542284554038">+54 2284 554038</a></p>
+    <p>💼 <a href="https://www.linkedin.com/in/hernan-gustavo-quiroga-19a9b6230" target="_blank">LinkedIn</a></p>
+  </div>
+</section>
+
+<footer>
+  © 2025 Hernán Gustavo Quiroga | <a href="https://nexura-web.vercel.app" style="color:var(--primary);">Portfolio NexuraVR</a>
+</footer>
+
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <span class="close" onclick="closeModal()">&times;</span>
+  <img class="modal-content" id="modal-img">
+</div>
+
+<script>
+  function openModal(el) {
+    document.getElementById('modal').style.display = 'block';
+    document.getElementById('modal-img').src = el.querySelector('img').src;
+  }
+  function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+  }
+</script>
+
+</body>
+</html>
